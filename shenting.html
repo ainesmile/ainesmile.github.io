@@ -7,14 +7,12 @@
             /*基础样式*/
             body {
                 line-height: 2em;
-                font-size: 18px;
-                /*font-size: 16px;*/
+                font-size: 16px;
                 font-family: Times, kaiti;
                 font-weight: 500;
                 min-width: 60em;
                 padding: 0;
                 margin: 0 auto;
-                text-rendering: optimizeLegibility;
             }
             a {
                 text-decoration: none;
@@ -70,8 +68,13 @@
                 top: -1.3em;
             }
             span.date, span.degree {
-                display: block;
                 position: absolute;
+            }
+            span.date {
+                right: 0;
+            }
+            span.degree {
+                right: 16em;
             }
 
             /*统一宽度以对齐*/
@@ -81,10 +84,9 @@
             li.twitter, div.others {
                 width: 12em;
             }
-
-            /*div.skill-details ul, ul.work-contents, ul.content {
-                padding-left: 1.6em;
-            }*/
+            div.work-details, div.edu-details {
+                width: 40em;
+            }
 
             /*联系方式*/
             section.contacts ul{
@@ -112,8 +114,8 @@
             section.experiences {
                 margin-top: 15em;
             }
+
             ul.work-contents {
-                margin: 0;
                 margin-top: -1em;
             }
             div.work-details span.date {
@@ -129,18 +131,9 @@
             h4.bachelor {
                 margin-top: -1em;
             }
-            h4.master span.degree, h4.master span.date {
-                top: 1.3em;
-            }
-            h4.bachelor span.degree, h4.bachelor span.date {
-                top: 3.6em;
-            }
-            h4.master span.degree, h4.bachelor span.degree {
-                right: -8em;
-            }
-            h4.master span.date, h4.bachelor span.date {
-                right: -22em;
-            }
+           /* h4.master span.date, h4.bachelor span.date {
+                right: 0;
+            }*/
         </style>
     </head>
 
