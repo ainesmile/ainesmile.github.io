@@ -2,18 +2,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>沈  婷</title>
         <style type="text/css">
             /*基础样式*/
             body {
                 line-height: 2em;
-                font-size: 16px;
+                font-size: 18px;
+                /*font-size: 16px;*/
                 font-family: Times, kaiti;
                 font-weight: 500;
                 min-width: 60em;
                 padding: 0;
                 margin: 0 auto;
+                text-rendering: optimizeLegibility;
             }
             a {
                 text-decoration: none;
@@ -26,11 +27,11 @@
             header {
                 background: #f4f6f6;
                 text-align: center;
-                padding: 2em 0;
+                padding: 1.6em 0;
                 margin: 0 auto;
             }
             section.contents {
-                max-width: 750px;
+                max-width: 48em;
                 margin: 0 auto;
             }
             h1 {
@@ -58,6 +59,7 @@
             /*基本定位*/
             section.contacts, section.skills, section.experiences, section.educations {
                 position: relative;
+                margin-bottom: -0.2em;
             }
             div.contact-details, div.skill-details, div.work-details, div.edu-details {
                 font-weight: 500;
@@ -67,62 +69,78 @@
                 left: 8em;
                 top: -1.3em;
             }
-            section.experiences {
-                margin-top: 16em;
-                
-            }
-            section.educations {
-                margin-top: 15em;
-            }
-            span.date {
+            span.date, span.degree {
                 display: block;
                 position: absolute;
             }
-            div.work-details span.date {
-                right: 0;
-                top: 1.3em;
+
+            /*统一宽度以对齐*/
+            li.mail, li.telephone, div.front-end, div.back-end {
+                width: 14em;
             }
-            h4.master span.date {
-                right: -21em;
-                top: 1.3em;
-            }
-            h4.bachelor span.date {
-                right: -21em;
-                top: 4.6em;
+            li.twitter, div.others {
+                width: 12em;
             }
 
-            /*特殊样式*/
+            /*div.skill-details ul, ul.work-contents, ul.content {
+                padding-left: 1.6em;
+            }*/
+
+            /*联系方式*/
             section.contacts ul{
                 padding: 0;
             }
             section.contacts li {
                 float: left;
-                padding: 0;
-                padding-right: 2.5em;
-                margin: 0;
             }
             section.contacts a {
                 color: #2ecc71;
             }
 
+            /*编程技能*/
             div.skill-details div {
                 float: left;
-            }
-            div.back-end {
-                margin: 0 2em;
-            }
-            div.others {
+                padding: 0;
                 margin: 0;
-                margin-left: 1em;
             }
+            
             div.skill-details ul {
                 margin-top: -1em;
             }
 
-            section.educations {
-                margin-bottom: 6em;
+            /*工作经历*/
+            section.experiences {
+                margin-top: 15em;
+            }
+            ul.work-contents {
+                margin: 0;
+                margin-top: -1em;
+            }
+            div.work-details span.date {
+                top: 1.3em;
+                right: 0;
             }
 
+            /*教育背景*/
+            section.educations {
+                margin-top: 15em;
+                margin-bottom: 4em;
+            }
+            h4.bachelor {
+                margin-top: -1em;
+            }
+            h4.master span.degree, h4.master span.date {
+                top: 1.3em;
+            }
+            h4.bachelor span.degree, h4.bachelor span.date {
+                top: 3.6em;
+            }
+            h4.master span.degree, h4.bachelor span.degree {
+                right: -8em;
+            }
+            h4.master span.date, h4.bachelor span.date {
+                right: -22em;
+            }
         </style>
     </head>
 
@@ -137,17 +155,17 @@
                 <h3>联系方式</h3>
                 <div class="contact-details">
                     <ul>
-                        <li>
+                        <li class="mail">
                             <a href="mailto:ainesmile@gmail.com">
                                 ainesmile@gmail.com
                             </a>
-                        </li>
-                        <li>
+                        </li>   
+                        <li class="telephone">
                             <a href="tel:13261432470">
                                 (+86) 132~6143~2470
                             </a>
                         </li>
-                        <li>
+                        <li class="twitter">
                             <a href="https://twitter.com/ainesmile" target="_blank">
                                 Twitter: @ainesmile
                             </a>
@@ -168,8 +186,8 @@
                             <li>jQuery / Zepto.js</li>
                             <li>Underscore.js</li>
                             <li>Backbone.js</li>
-                            <li>Node.js / Express</li>
-                            <li>Jade / Haddlebars</li>
+                            <li>Node.js（熟悉） / Express</li>
+                            <li>Jade / Handlebars</li>
                         </ul>
                     </div>
 
@@ -207,17 +225,18 @@
                     <div>
                         <ul class="work-contents">
                             <li>
-                                负责微影院项目的后期维护，项目使用了Underscore、Backbone与Grunt等;
+                                参与智慧影院项目开发，项目使用了 Node.js、Express、Jade 与 Gulp 等;
                                 <ul class = "content">
-                                    <li>开发部分功能及修复Bug；</li>
-                                    <li>对原有代码进行重构。</li>
+                                    <li>使用 Express Web 应用框架，开发后端服务；</li>
+                                    <li>使用 Zepto 与 RequireJS，开发前端服务。</li>
                                 </ul>
                             </li>
                             <li>
-                                参与智慧影院项目开发，项目使用了Node.js、Express、Jade与Gulp等;
+                                负责微影院项目的维护，项目使用了 Underscore、Backbone 与 Grunt 等;
                                 <ul class = "content">
-                                    <li>利用Express Web应用框架，开发后端服务；</li>
-                                    <li>利用Zepto与RequireJS，开发前端服务。</li>
+                                    <li>开发部分功能及修复Bug；</li>
+                                    <li>将原有代码模板化，大幅降低开发量；</li>
+                                    <li>对原有代码进行重构，大幅降低维护成本。</li>
                                 </ul>
                             </li>
                         </ul>
@@ -230,10 +249,14 @@
                 <div class="edu-details">
                     <h4 class="master">
                         <a href="http://www.uibe.edu.cn/" target="_blank">对外经济贸易大学（世界经济）</a>
+                        <span class="degree">硕士</span>
                         <span class="date">2012.09 ~ 2014.07</span>
                     </h4>
                     <h4 class="bachelor">
-                        <a href="http://www.shufe.edu.cn/" target="_blank">上海财经大学（数理经济）</a>
+                        <a href="http://www.shufe.edu.cn/" target="_blank">
+                            上海财经大学（数理经济）
+                        </a>
+                        <span class="degree">学士</span>
                         <span class="date">2008.09 ~ 2012.07</span>
                     </h4>
                 </div>
