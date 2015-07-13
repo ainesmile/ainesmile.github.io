@@ -4,8 +4,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>沈  婷</title>
-
         <style type="text/css">
+            /*基础样式*/
             body {
                 line-height: 2em;
                 font-size: 16px;
@@ -15,168 +15,127 @@
                 padding: 0;
                 margin: 0 auto;
             }
+            a {
+                text-decoration: none;
+                color: #171717;
+            }
+            a:visited {
+                color: #171717;
+            }
+            
             header {
                 background: #f4f6f6;
                 text-align: center;
-                padding: 1em 0;
+                padding: 2em 0;
                 margin: 0 auto;
             }
             section.contents {
                 max-width: 750px;
                 margin: 0 auto;
             }
-
-            
-            a {
-                text-decoration: none;
-            }
-            a:visited {
-                color: #171717;
-            }
-            .experiences li {
-                list-style-type: decimal;
-            }
-            .content li {
-                list-style-type: disc;
-            }
-
             h1 {
                 font-weight: 500;
                 margin-left: -4em;
             }
-            h2 {
+            h1 span {
                 color: #95a5a6;
-                font-weight: 500;
-                margin-left: -3.5em;
             }
             h3 {
                 color: #f1c40f;
                 font-weight: 500;
             }
 
-           /* section.contents {
-                position: relative;
-            }*/
-
-            /*联系方式*/
-            section.contacts {
-                position: relative;
-
+            section.contacts li {
+                list-style-type: none;
             }
-            section.contacts div {
+            section.experiences li {
+                list-style-type: decimal;
+            }
+            ul.content li {
+                list-style-type: disc;
+            }
+
+            /*基本定位*/
+            section.contacts, section.skills, section.experiences, section.educations {
+                position: relative;
+            }
+            div.contact-details, div.skill-details, div.work-details, div.edu-details {
                 font-weight: 500;
                 position: absolute;
                 margin: 0;
                 padding: 0;
                 left: 8em;
-                top: -1.2em;
+                top: -1.3em;
+            }
+            section.experiences {
+                margin-top: 16em;
                 
             }
-            section.contacts ul {
-                list-style-type: none;
+            section.educations {
+                margin-top: 15em;
+            }
+            span.date {
+                display: block;
+                position: absolute;
+            }
+            div.work-details span.date {
+                right: 0;
+                top: 1.3em;
+            }
+            h4.master span.date {
+                right: -21em;
+                top: 1.3em;
+            }
+            h4.bachelor span.date {
+                right: -21em;
+                top: 4.6em;
+            }
+
+            /*特殊样式*/
+            section.contacts ul{
                 padding: 0;
             }
             section.contacts li {
                 float: left;
-                padding: 0 1em;
+                padding: 0;
+                padding-right: 2.5em;
                 margin: 0;
             }
             section.contacts a {
                 color: #2ecc71;
             }
 
-
-            /*编程技能*/
-            section.skills {
-                position: relative;
-            }
-            
-            div.details {
-                position: absolute;
-                margin: 0;
-                padding: 0;
-                left: 9em;
-                top: -1.3em;
-            }
-            div.details div {
+            div.skill-details div {
                 float: left;
             }
             div.back-end {
-                margin: 0 3em;
+                margin: 0 2em;
             }
             div.others {
-                margin: 0 3em;
+                margin: 0;
+                margin-left: 1em;
             }
-            div.details ul {
+            div.skill-details ul {
                 margin-top: -1em;
             }
 
-            /*工作经历*/
-            section.experiences {
-                margin-top: 16em;
+            section.educations {
+                margin-bottom: 6em;
             }
-            /*section.experiences {
-                position: relative;
-            }*/
-            div.work-details {
-                font-weight: 500;
-                position: relative;
-                margin: 0;
-                padding: 0;
-                left: 9em;
-                top: -3.3em;
-            }
-            div.work-details h4 span {
-                position: absolute;
-                right: 9em;
-            }
-
-            /*教育背景*/
-            /*section.educations {
-                position: relative;
-            }*/
-            div.edu-details {
-                position: relative;
-                margin: 0;
-                padding: 0;
-                left: 9em;
-                top: -3.3em;
-            }
-            div.edu-details h4 span {
-                position: absolute;
-                right: 9em;
-            }
-
-            
-
-
-
-            
-
-
-
-
-            
-            
-            
-
-
-           
-
 
         </style>
     </head>
 
     <body>
         <header>
-            <h1>沈婷（Web前端）</h1>
-            <!-- <h2>Web前端</h2> -->
+            <h1>沈婷<span>（Web前端）</span></h1>
         </header>
 
         <section class="contents">
+
             <section class="contacts">
                 <h3>联系方式</h3>
-                <div>
+                <div class="contact-details">
                     <ul>
                         <li>
                             <a href="mailto:ainesmile@gmail.com">
@@ -199,26 +158,26 @@
 
             <section class="skills">
                 <h3>编程技能</h3>
+                <div class="skill-details">
 
-                <div class="details">
                     <div class="front-end">
                         <h4>Web前端</h4>
                         <ul>
                             <li>JavaScript</li>
-                            <li>HTML5/CSS3</li>
-                            <li>jQuery</li>
+                            <li>HTML5 / CSS3</li>
+                            <li>jQuery / Zepto.js</li>
                             <li>Underscore.js</li>
                             <li>Backbone.js</li>
-                            <li>Node.js/Express</li>
-                            <li>Jade</li>
+                            <li>Node.js / Express</li>
+                            <li>Jade / Haddlebars</li>
                         </ul>
                     </div>
 
                     <div class="back-end">
                         <h4>Web后端</h4>
                         <ul>
-                            <li>Python</li>
-                            <li>C</li>
+                            <li>Python（基础）</li>
+                            <li>C（熟悉）</li>
                             <li>SQL</li>
                         </ul>
                     </div>
@@ -230,10 +189,11 @@
                             <li>Vim</li>
                             <li>T<sub>E</sub>X</li>
                             <li>Markdown</li>
-                            <li>STATA</li>
+                            <li>Stata</li>
                             <li>Mathematica</li>
                         </ul>
                     </div>
+                    
                 </div>
             </section>
 
@@ -242,22 +202,22 @@
                 <div class="work-details">
                     <h4>
                         <a href="http://www.wepiao.com/" target="_blank">北京微影时代科技有限公司</a>
-                        <span>2014.12 ~ 2015.06</span>
+                        <span class="date">2014.12 ~ 2015.06</span>
                     </h4>
-
-                    <div class="work-contents">
-                        <ul>
-                            <li>负责微影院项目前端代码的后期维护;
+                    <div>
+                        <ul class="work-contents">
+                            <li>
+                                负责微影院项目的后期维护，项目使用了Underscore、Backbone与Grunt等;
                                 <ul class = "content">
-                                    <li>代码重构</li>
-                                    <li>修复Bug</li>
+                                    <li>开发部分功能及修复Bug；</li>
+                                    <li>对原有代码进行重构。</li>
                                 </ul>
                             </li>
-                            <li>参与智慧影院项目开发。
+                            <li>
+                                参与智慧影院项目开发，项目使用了Node.js、Express、Jade与Gulp等;
                                 <ul class = "content">
-                                    <li></li>
-                                    <li></li>
-                                    <li></li>
+                                    <li>利用Express Web应用框架，开发后端服务；</li>
+                                    <li>利用Zepto与RequireJS，开发前端服务。</li>
                                 </ul>
                             </li>
                         </ul>
@@ -268,20 +228,18 @@
             <section class="educations">
                 <h3>教育背景</h3>
                 <div class="edu-details">
-                    <h4>
+                    <h4 class="master">
                         <a href="http://www.uibe.edu.cn/" target="_blank">对外经济贸易大学（世界经济）</a>
-                        <span>2012.09 ~ 2014.07</span>
+                        <span class="date">2012.09 ~ 2014.07</span>
                     </h4>
-                    <h4>
+                    <h4 class="bachelor">
                         <a href="http://www.shufe.edu.cn/" target="_blank">上海财经大学（数理经济）</a>
-                        <span>2008.09 ~ 2012.07</span>
+                        <span class="date">2008.09 ~ 2012.07</span>
                     </h4>
                 </div>
             </section>
 
         </section>
-
-
     </body>
 
 </html>
