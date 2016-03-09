@@ -2,261 +2,182 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-        <title>沈  婷</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+        <title>沈 婷</title>
+        <link rel="shortcut icon" href="ainesmile.png" type="image/x-icon" />
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css"></li>
         <style type="text/css">
-            /*基础样式*/
             body {
                 line-height: 2em;
                 font-size: 16px;
                 font-family: Times, kaiti;
                 font-weight: 500;
-                min-width: 60em;
                 padding: 0;
                 margin: 0 auto;
             }
-            a {
+            a, a:hover {
                 text-decoration: none;
                 color: #171717;
             }
             a:visited {
                 color: #171717;
             }
-            
-            header {
-                background: #f4f6f6;
-                text-align: center;
-                padding: 1.6em 0;
-                margin: 0 auto;
-            }
-            section.contents {
-                max-width: 48em;
-                margin: 0 auto;
-            }
-            h1 {
-                font-weight: 500;
-                margin-left: -4em;
-            }
-            h1 span {
-                color: #95a5a6;
-            }
-            h3 {
-                color: #f1c40f;
-                font-weight: 500;
-            }
-
-            section.contacts li {
-                list-style-type: none;
-            }
-            section.experiences li {
-                list-style-type: decimal;
-            }
-            ul.content li {
-                list-style-type: disc;
-            }
-
-            /*基本定位*/
-            section.contacts, section.skills, section.experiences, section.educations {
-                position: relative;
-                margin-bottom: -0.2em;
-            }
-            div.contact-details, div.skill-details, div.work-details, div.edu-details {
-                font-weight: 500;
-                position: absolute;
-                margin: 0;
-                padding: 0;
-                left: 8em;
-                top: -1.3em;
-            }
-            span.date, span.degree {
-                position: absolute;
-            }
-            span.date {
-                right: 0;
-            }
-            span.degree {
-                right: 16em;
-            }
-
-            /*统一宽度以对齐*/
-            li.mail, li.telephone, div.front-end, div.back-end {
-                width: 14em;
-            }
-            li.twitter, div.others {
-                width: 12em;
-            }
-            div.work-details, div.edu-details {
-                width: 40em;
-            }
-
-            /*联系方式*/
-            section.contacts ul{
-                padding: 0;
-                padding-top: 0.3em;
-            }
-            section.contacts li {
-                float: left;
-            }
-            section.contacts a {
+            .contracts a {
                 color: #2ecc71;
             }
-
-            /*编程技能*/
-            div.skill-details div {
-                float: left;
-                padding: 0;
-                margin: 0;
-            }
-            
-            div.skill-details ul {
-                margin-top: -1em;
-            }
-
-            /*工作经历*/
-            section.experiences {
-                margin-top: 16em;
-            }
-
-            ul.work-contents {
-                margin-top: -1em;
-            }
-            div.work-details span.date {
-                top: 1.3em;
-                right: 0;
-            }
-
-            /*教育背景*/
-            section.educations {
-                margin-top: 16em;
-                margin-bottom: 4em;
-            }
-            h4.bachelor {
-                margin-top: -1em;
+            .educations li {
+                list-style-type: none;
             }
         </style>
     </head>
 
     <body>
         <header>
-            <h1>沈婷<span>（Web前端）</span></h1>
+            <h1 class="text-center">
+                沈婷
+            </h1>
         </header>
 
-        <section class="contents">
-
-            <section class="contacts">
-                <h3>联系方式</h3>
-                <div class="contact-details">
-                    <ul>
-                        <li class="mail">
+        <div class="container">
+            <section class="row">
+                <div class="contracts">
+                    <h4 class="col-md-2 col-sm-2">联系方式</h4>
+                    <div class="col-md-10">
+                        <div class="col-md-4 col-sm-4">
                             <a href="mailto:ainesmile@gmail.com">
                                 ainesmile@gmail.com
                             </a>
-                        </li>   
-                        <li class="telephone">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
                             <a href="tel:13261432470">
                                 (+86) 132~6143~2470
                             </a>
-                        </li>
-                        <li class="twitter">
-                            <a href="https://twitter.com/ainesmile" target="_blank">
-                                Twitter: @ainesmile
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            GitHub:
+                            <a href="https://github.com/ainesmile">
+                                ainesmile
                             </a>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </section>
 
-            <section class="skills">
-                <h3>编程技能</h3>
-                <div class="skill-details">
+            <section class="row">
+                <div>
+                    <h4 class="col-md-2 col-sm-2">编程技能</h4>
+                    <div class="col-md-10">
+                        <div class="col-md-4">
+                            Web 前端
+                            <ul>
+                                <li>JavaScript</li>
+                                <li>AngularJS(1.4.8)</li>
+                            </ul>
+                        </div>
 
-                    <div class="front-end">
-                        <h4>Web前端</h4>
-                        <ul>
-                            <li>JavaScript</li>
-                            <li>HTML5 / CSS3</li>
-                            <li>jQuery / Zepto.js</li>
-                            <li>Underscore.js</li>
-                            <li>Backbone.js</li>
-                            <li>Node.js / Express</li>
-                            <li>Jade / Handlebars</li>
-                        </ul>
-                    </div>
+                        <div class="col-md-4 col-sm-4">
+                            Web 后端
+                            <ul>
+                                <li>C 语言（基础）</li>
+                                <li>Python （基础）</li>
+                            </ul>
+                        </div>
 
-                    <div class="back-end">
-                        <h4>Web后端</h4>
-                        <ul>
-                            <li>C</li>
-                            <li>Python</li>
-                            <li>SQL</li>
-                        </ul>
+                        <div class="col-md-4 col-sm-4">
+                            其他
+                            <ul>
+                                <li>Git/Vim/Zsh</li>
+                                <li>Mathematica</li>
+                            </ul>
+                        </div>
                     </div>
-
-                    <div class="others">
-                        <h4>其他</h4>
-                        <ul>
-                            <li>Git</li>
-                            <li>Vim</li>
-                            <li>T<sub>E</sub>X</li>
-                            <li>Markdown</li>
-                            <li>Stata</li>
-                            <li>Mathematica</li>
-                        </ul>
-                    </div>
-                    
                 </div>
             </section>
 
-            <section class="experiences">
-                <h3>工作经历</h3>
-                <div class="work-details">
-                    <h4>
-                        <a href="http://www.wepiao.com/" target="_blank">北京微影时代科技有限公司</a>
-                        <span class="date">2014.12 ~ 2015.06</span>
-                    </h4>
-                    <div>
-                        <ul class="work-contents">
-                            <li>
-                                参与智慧影院项目开发，项目使用了 Node.js、Express、Jade 与 Gulp 等;
-                                <ul class = "content">
-                                    <li>使用 Express Web 应用框架，开发后端服务；</li>
-                                    <li>使用 Zepto 与 RequireJS，开发前端服务。</li>
-                                </ul>
+            <section class="row">
+                <div>
+                    <h4 class="col-md-2 col-sm-2">工作经历</h4>
+                    <div class="col-md-10 col-sm-10">
+                        <ul class="col-md-12 col-sm-12">
+                            <a href="https://www.shurenyun.com/">
+                                北京数人科技有限公司
+                            </a>
+                            <span>2015.07 ~ 2016.03</span>
+                            <ul>
+                                <li>
+                                    使用 AngularJS 开发操作面板
+                                    <ul>
+                                        <li>与后端通过 HTTP 和 WebSocket 进行通信，根据集群类型、主机状态和组件状态等，计算并实时更新集群状态</li>
+                                        <li>利用 ECharts 绘制集群及主机的资源监控图，包括多核 CPU 监控、内存监控以及磁盘多目录监控</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    使用 AngularJS 开发用户模块
+                                    <ul>
+                                        <li>
+                                            遵照
+                                            <a href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md" target="_blank">
+                                                Angular 1 Style Guide
+                                            </a>
+                                            的规范，并使用函数式编程的风格，开发包括注册、登录、修改与重置密码等功能
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </ul>
+                        <ul class="col-md-12 col-sm-12">
+                            <a href="http://www.wepiao.com/">
+                                北京微影时代科技有限公司
+                            </a>
+                            <span>2014.12 ~ 2015.06</span>
+                            <ul>
+                                <li>
+                                    参与智慧影院项目开发，项目使用了 Node.js、Express 和 Jade
+                                    <ul>
+                                        <li>使用 Express Web 应用框架，开发后端服务</li>
+                                        <li>使用 Zepto 与 RequireJS，开发前端服务</li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    负责微影院项目的维护，项目使用了 Underscore 和 Backbone
+                                    <ul>
+                                        <li>开发部分功能及修复 bug</li>
+                                        <li>将原有代码模板化，大幅降低开发量</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="row">
+                <div>
+                    <h4 class="col-md-2 col-sm-2">教育背景</h4>
+                    <div class="col-md-10 col-sm-10 educations">
+                        <ul class="master col-md-12 col-sm-12">
+                            <li class="col-md-3 col-sm-3">
+                                <a href="http://www.uibe.edu.cn/">
+                                    对外经济贸易大学
+                                </a>
                             </li>
-                            <li>
-                                负责微影院项目的维护，项目使用了 Underscore、Backbone 与 Grunt 等;
-                                <ul class = "content">
-                                    <li>开发部分功能及修复 Bug；</li>
-                                    <li>将原有代码模板化，大幅降低开发量；</li>
-                                    <li>对原有代码进行重构，大幅降低维护成本。</li>
-                                </ul>
+                            <li class="col-md-3 col-sm-3">世界经济</li>
+                            <li class="col-md-3 col-sm-3">硕士</li>
+                            <li class="col-md-3 col-sm-3">2012.09 ~ 2014.07</li>
+                        </ul>
+                        <ul class="bachelor col-md-12 col-sm-12">
+                            <li class="col-md-3 col-sm-3">
+                                <a href="http://www.shufe.edu.cn/">
+                                    上海财经大学
+                                </a>
                             </li>
+                            <li class="col-md-3 col-sm-3">数理经济</li>
+                            <li class="col-md-3 col-sm-3">学士</li>
+                            <li class="col-md-3 col-sm-3">2008.09 ~ 2012.07</li>
                         </ul>
                     </div>
                 </div>
             </section>
-
-            <section class="educations">
-                <h3>教育背景</h3>
-                <div class="edu-details">
-                    <h4 class="master">
-                        <a href="http://www.uibe.edu.cn/" target="_blank">
-                            对外经济贸易大学（世界经济）
-                        </a>
-                        <span class="degree">硕士</span>
-                        <span class="date">2012.09 ~ 2014.07</span>
-                    </h4>
-                    <h4 class="bachelor">
-                        <a href="http://www.shufe.edu.cn/" target="_blank">
-                            上海财经大学（数理经济）
-                        </a>
-                        <span class="degree">学士</span>
-                        <span class="date">2008.09 ~ 2012.07</span>
-                    </h4>
-                </div>
-            </section>
-
-        </section>
+        </div>
     </body>
-
 </html>
