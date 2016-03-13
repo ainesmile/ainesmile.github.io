@@ -41,7 +41,7 @@ int main() {
 // assemble
 .section .data
 string:
-    .ascii "hello, world\\n"
+    .ascii "hello, world\n"
 string_end:
     .equ len, string_end - string
 
@@ -67,4 +67,4 @@ main:
 {% endhighlight %}
 
 ### 笔记来源
-[深入理解计算机系统（原书第2版）](https://book.douban.com/subject/5333562/)
+[深入理解计算机系统（原书第2版）](http://www.amazon.cn/gp/product/B004BJ18KM/ref=as_li_ss_tl?ie=UTF8&camp=536&creative=3132&creativeASIN=B004BJ18KM&linkCode=as2&tag=soasme-23)
