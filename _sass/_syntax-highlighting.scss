@@ -6,7 +6,8 @@
     @extend %vertical-rhythm;
 
     .highlighter-rouge & {
-      background: #eef;
+      // background: #eef;
+      background: #f5f5f5;
     }
 
     .c     { color: #998; font-style: italic } // Comment
@@ -48,10 +49,10 @@
     .nv    { color: #008080 } // Name.Variable
     .ow    { font-weight: bold } // Operator.Word
     .w     { color: #bbb } // Text.Whitespace
-    .mf    { color: #099 } // Literal.Number.Float
-    .mh    { color: #099 } // Literal.Number.Hex
-    .mi    { color: #099 } // Literal.Number.Integer
-    .mo    { color: #099 } // Literal.Number.Oct
+    .mf    { color: #208050 } // Literal.Number.Float
+    .mh    { color: #208050 } // Literal.Number.Hex
+    .mi    { color: #208050 } // Literal.Number.Integer
+    .mo    { color: #208050 } // Literal.Number.Oct
     .sb    { color: #d14 } // Literal.String.Backtick
     .sc    { color: #d14 } // Literal.String.Char
     .sd    { color: #d14 } // Literal.String.Doc
