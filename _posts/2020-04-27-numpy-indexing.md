@@ -46,6 +46,7 @@ What's more, with strides we can easily locate an ndarray that the underlying me
 ```python
 >>> x = np.arange(24, dtype=np.int32).reshape(4, 3, 2)
 >>> x.strides
+(24, 8, 4)
 >>> bytearray(x.data)
 bytearray(b'
 \x00\x00\x00\x00
@@ -256,10 +257,10 @@ With the right syntax, we can still get an empty array. If the start index `i` i
 # 6. in wrong slice order, an empty array returned, and shares no memory
 >>> y = x[2:4:-1]
 >>> y
-array([], dtype=int64)
+array([], dtype='int64')
 >>> z = x[4:2:1]
 >>> z
-array([], dtype=int64)
+array([], dtype='int64')
 >>> np.shares_memory(x, y), np.shares_memory(x, z), np.shares_memory(y, z)
 (False, False, False) 
 ```
