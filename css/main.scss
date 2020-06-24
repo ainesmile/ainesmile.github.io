@@ -54,20 +54,33 @@ $on-laptop:        800px;
 
 table{
     border-collapse: collapse;
-    border-spacing: 2px;
+    border-spacing: 1px;
     border:1px solid #4f9deb;
-    padding: 0.75rem;
+    padding: 0.5rem;
     margin-left:auto; 
     margin-right:auto;
+    font-size: 12px;
+    text-align: center;
 }
 
 th{
     border:1px solid #dee2e6;
-    padding: 0.75rem;
+    padding: 0.5rem;
     color: #212529;
 }
 
 td{
     border:1px solid #dee2e6;
-    padding: 0.75rem;
+    padding: 0.5rem;
+    // white-space:pre;
+    white-space:pre-line;
+}
+
+caption {
+    font-size: 20px;
+    color: #212529;
+}
+
+td > code {
+    font-size: 12px;
 }
