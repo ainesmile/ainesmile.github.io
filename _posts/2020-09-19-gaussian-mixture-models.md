@@ -24,7 +24,7 @@ Gaussian mixture model(GMM) is an clustering algorithm similar to [k-means](/mac
 
 4. $$\begin{equation}
     P(x_i=x | z_i=k) \sim N(\mu_k, \Sigma_k)
-    \end{equation}$$, $$N(\mu_k, \Sigma_k)$$ is a multivariate Gaussian distribution, the desity function is
+    \end{equation}$$, $$N(\mu_k, \Sigma_k)$$ is a multivariate Gaussian distribution, the density function is
 
 $$\begin{equation}
     f(x_i) = \frac{1}{\sqrt{(2 \pi)^d \det \Sigma_k}}
@@ -48,7 +48,7 @@ $$\begin{equation}
 \begin{aligned}
     P(z_i=k|x_i) & = \frac{P(x_i|z_i)P(z_i=k)}{P(x_i)} \\
     & = \frac{P(x_i|z_i)P(z_i=k)}{\sum_{k=1}^KP(x_i|z_i)P(z_i=k)} \\
-    & = \frac{\pi_k*N(\mu_k, \Sigma_k)}{\sum_{k=1}^K\pi_k*N(\mu_k, \Sigma_k)} \\
+    & = \frac{\pi_k*N(x_i, \mu_k, \Sigma_k)}{\sum_{k=1}^K\pi_k*N(x_i, \mu_k, \Sigma_k)} \\
     & = w_{ik}
 
 \end{aligned}
@@ -192,16 +192,17 @@ $$\begin{equation}
 \begin{aligned}
     \frac{\partial H}{\partial \mu_k}
     & = \sum_{i=1}^n w_{ik} * \frac{\partial logN(x_i|\mu_k, \Sigma_k)}{\partial \mu_k} \\
-    & = \sum_{i=1}^n w_{ik} * \frac{(x_i - \mu_k)}{\Sigma_k^2}
+    & = \sum_{i=1}^n w_{ik} \Sigma_{k}^{-1}(x_i - \mu_k)
 \end{aligned}
 \label{partialmu}
 \end{equation}$$
 
 and 
 
+
 $$\begin{equation}
     \frac{\partial H}{\partial \Sigma_k}
-     = \Sigma_k^{-3} * \sum_{i=1}^n w_{ik} * [(x_i-\mu_k)(x_i-\mu_k)^{T} -\Sigma_{k}^{2}]
+     = \frac{1}{2}\{ \sum_{i=1}^n w_{ik} \Sigma_{k}^{-T} (x_i - \mu_k)(x_i-\mu_k)^{T}(\Sigma^{-T} - I) \}
 \label{partialSigma}
 \end{equation}$$
 
@@ -246,3 +247,189 @@ Therefore, we got $$\theta_{t+1} = (\mu_1^*, \mu_2^*, ... \mu_K^*, \Sigma_1^*, \
 
 
 ## 5. A simple python implement
+
+First, we need to initialize $$\theta_0$$. Here, we use kmeans++, kmeans and random to initialize parameters. After initialization, we calculate the weights equation $$\eqref{weights}$$, which is the **E-step**.
+
+```python
+# 1. EM: Initlization and E-step
+
+def _kmeans_init(X, n_component, kmeans_method):
+    n_samples = X.shape[0]
+    if kmeans_method == 'kmeans++':
+        kmeans = KMeans(n_clusters=n_components).fit(X)
+    else:
+        kmeans = KMeans(n_clusters=n_components, init='random').fit(X)
+    labels = kmeans.labels_
+    
+    weight_matrix = None
+    
+    for i in range(n_component):
+        sub_component = X[labels==i]
+        
+        pi = sub_component.shape[0]/n_samples
+        mean = np.mean(sub_component, axis=0)
+        cov = np.cov(sub_component.T)
+        
+        pdf_value = multivariate_normal.pdf(X, mean, cov)
+        weight = pi*pdf_value
+        
+        if weight_matrix is None:
+            weight_matrix = weight
+        else:
+            weight_matrix = np.column_stack((weight_matrix, weight))
+        
+    weight_sum = np.sum(weight_matrix, axis=1)[:, np.newaxis]
+    weights = weight_matrix/weight_sum
+    return weights
+
+def _initialize(X, n_component, method):
+    # default random
+    n_samples = X.shape[0]
+    if method == 'kmeans++':
+        weights = _kmeans_init(X, n_component, 'kmeans++')
+    elif method == 'kmeans_random':
+        weights = _kmeans_init(X, n_component, 'kmeans_random')
+    else:
+        weights = np.random.rand(n_samples, n_components)
+        w = weights.sum(axis=1)
+        weight_sum = weights.sum(axis=1)[:, np.newaxis]
+        weights /= weight_sum
+        
+    return weights
+```
+
+Given the value of weights equation $$\eqref{weights}$$, we update the value of $$\theta$$ through MLE, which is the **M-step**. To avoid forloop, convert the numerator of equation $$\eqref{partialSigma}$$ as:
+
+$$\begin{equation}
+\begin{aligned}
+A & = \sum_{i=1}^n w_{ik}(x_i - \mu_k)(x_i - \mu_k)^T \\
+
+\Rightarrow \quad
+A_{st} &= \sum_{i=1}^n w_{ik}x_{is}x_{it} - \sum_{i=1}^n\mu_{ks}x_{it} - \sum_{i=1}^n\mu_{kt}x_{is} + \sum_{i=1}^n\mu_{ks}\mu_{kt}) for 1 <= s, t <= m \\
+
+\Rightarrow \quad 
+A_{st} & = A1_{st} - A2_{st} - A3_{st} + A4_{st}, where \\
+& A1 = w_k*(X.T) \\
+& A2 = A3.T \\
+& A3 = \mu_k((w_k*(X.T)).dot(H)) \\
+& A4 = (\sum_{i=1}^n w_{ik})*(\mu_k.dot(\mu_k.T)) \\
+\end{aligned}
+\end{equation}$$
+
+```python
+# 2. EM: M-step
+
+def _update_means(X, weights):
+    weight_sum = np.sum(weights, axis=0)
+    means = X.T.dot(weights)/weight_sum
+    return means
+
+def _update_covs(X, n_components, weights, means):
+    n, m = X.shape
+    covs = None
+    H = np.ones(shape=(n, m))
+    
+    for k in range(n_components):
+        weight = weights[:, k]
+        weight_sum = np.sum(weight)
+        mean = means[:, k]
+        weighted_X_T = weight*(X.T)
+        
+        a1 = (weighted_X_T).dot(X)
+        a3 = mean*(weighted_X_T.dot(H))
+        a2 = a3.T
+        mean_reshaped = mean.reshape(-1, 1)
+        a4 = weight_sum*((mean_reshaped).dot(mean_reshaped.T))
+        a = a1 - a2 - a3 + a4
+        
+        cov = a/weight_sum
+        if covs is None:
+            covs = cov
+        else:
+            covs = np.dstack((covs, cov))
+    return covs
+
+def _update_pis(weights):
+    w_each_component = np.sum(weights, axis=0)
+    w_sum = np.sum(w_each_component)
+    pis = w_each_component/w_sum
+    return pis
+
+def _update_weights(X, n_components, means, covs, pis):
+    weighted_pdf_array = None
+    for k in range(n_components):
+        mean = means[:, k]
+        cov = covs[:,:,k]
+        pi = pis[k]
+        pdf_values = multivariate_normal.pdf(X, mean, cov)
+        weighted_pdf_values = pi*pdf_values
+        if weighted_pdf_array is None:
+            weighted_pdf_array = weighted_pdf_values
+        else:
+            weighted_pdf_array = np.column_stack((weighted_pdf_array, weighted_pdf_values))
+    
+    weighted_sum = np.sum(weighted_pdf_array, axis=1)[:, np.newaxis]
+    weights = weighted_pdf_array/weighted_sum
+    return weights
+```
+
+```python
+# 3. gmm fit
+def gmm_fit(X, n_components, init_method, max_iter=100):
+    weights = _initialize(X, n_components, init_method)
+    iter_left = max_iter
+    while iter_left > 0:
+        means = _update_means(X, weights)
+        covs = _update_covs(X, n_components, weights, means)
+        pis = _update_pis(weights)
+        weights_next = _update_weights(X, n_components, means, covs, pis)
+        
+        if np.allclose(weights, weights_next):
+            print('converage at step', max_iter-iter_left)
+            break
+        else:
+            weights = weights_next
+            iter_left -= 1
+    return means, covs, weights_next
+
+# 4. predict labels
+def gmm_predict(X, n_components, means, covs, weights):
+    pdf_values = None
+    for k in range(n_components):
+        mean = means[:, k]
+        cov = covs[:, :, k]
+        pdf_value = multivariate_normal.pdf(X, mean, cov)
+        if pdf_values is None:
+            pdf_values = pdf_value
+        else:
+            pdf_values = np.column_stack((pdf_values, pdf_value))
+    labels = np.argmax(pdf_values, axis=1)
+    return labels
+
+# 5. gmm
+def gmm_fit_predict(X, n_components, init_method, max_iter):
+    means, covs, weights = gmm_fit(X, n_components, init_method, max_iter)
+    labels = gmm_predict(X, n_components, means, covs, weights)
+    return labels
+```
+
+
+```python
+# 6. result and demonstration
+def plot_scatter(ax, X, labels, title):
+    ax.scatter(X[:, 0], X[:, 1], c=labels)
+    ax.set_title(title)
+
+n_components = 3
+gmm_labels_kmeans_plus_plus = gmm_fit_predict(X, n_components, 'kmeans++', max_iter=1000)
+gmm_labels_kmeans_random = gmm_fit_predict(X, n_components, 'kmeans_random', max_iter=1000)
+gmm_labels_random = gmm_fit_predict(X, n_components, 'random', max_iter=1000)
+
+fig, axes = plt.subplots(2, 2, figsize=(16, 10))
+plot_scatter(axes[0, 0], X, y, 'Blobs')
+plot_scatter(axes[0, 1], X, gmm_labels_kmeans_plus_plus, 'kmeans++')
+plot_scatter(axes[1, 0], X, gmm_labels_kmeans_random, 'kmeans random')
+plot_scatter(axes[1, 1], X, gmm_labels_random, 'random')
+```
+
+![image](/pics/GaussianMixtureModels.png)
