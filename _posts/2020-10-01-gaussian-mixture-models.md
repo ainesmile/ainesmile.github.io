@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "A Simple Note for Gaussian Mixture Models"
-date:   2020-09-19 +0800
-keywords: GMM cluster
+date:   2020-10-01 +1200
+keywords: GMM clustering
 categories: Machine-Learning
 ---
 
@@ -251,6 +251,18 @@ Therefore, we got $$\theta_{t+1} = (\mu_1^*, \mu_2^*, ... \mu_K^*, \Sigma_1^*, \
 First, we need to initialize $$\theta_0$$. Here, we use kmeans++, kmeans and random to initialize parameters. After initialization, we calculate the weights equation $$\eqref{weights}$$, which is the **E-step**.
 
 ```python
+# 0. import
+import numpy as np
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+from scipy.stats import multivariate_normal
+
+X, y = make_blobs()
+```
+
+
+```python
 # 1. EM: Initlization and E-step
 
 def _kmeans_init(X, n_component, kmeans_method):
@@ -305,14 +317,25 @@ $$\begin{equation}
 A & = \sum_{i=1}^n w_{ik}(x_i - \mu_k)(x_i - \mu_k)^T \\
 
 \Rightarrow \quad
-A_{st} &= \sum_{i=1}^n w_{ik}x_{is}x_{it} - \sum_{i=1}^n\mu_{ks}x_{it} - \sum_{i=1}^n\mu_{kt}x_{is} + \sum_{i=1}^n\mu_{ks}\mu_{kt}) for 1 <= s, t <= m \\
+A_{st} &= \sum_{i=1}^n w_{ik}x_{is}x_{it} - \sum_{i=1}^nw_{ik}\mu_{ks}x_{it} - \sum_{i=1}^nw_{ik}\mu_{kt}x_{is} + \sum_{i=1}^nw_{ik}\mu_{ks}\mu_{kt} \\
 
 \Rightarrow \quad 
-A_{st} & = A1_{st} - A2_{st} - A3_{st} + A4_{st}, where \\
-& A1 = w_k*(X.T) \\
-& A2 = A3.T \\
-& A3 = \mu_k((w_k*(X.T)).dot(H)) \\
-& A4 = (\sum_{i=1}^n w_{ik})*(\mu_k.dot(\mu_k.T)) \\
+A_{st} & = A1_{st} - A2_{st} - A3_{st} + A4_{st}
+\end{aligned}
+\end{equation}$$
+
+
+for $$ 1 \leq s, t \leq d$$, where
+
+$$\begin{equation}
+\begin{aligned}
+A1 & = w_k*(X.T) \\
+A2 & = A3.T \\
+A3 & = \mu_k((w_k*(X.T)).dot(H)) \\
+A4 & = (\sum_{i=1}^n w_{ik})*(\mu_k.dot(\mu_k.T)) \\
+w_k & = np.array([w_k1, w_k2, ... w_kn]) \\
+\mu_k & = np.array([\mu_k1, \mu_k2, ..., \mu_kd]) \\
+H & = np.ones(shape=(n, d))
 \end{aligned}
 \end{equation}$$
 
