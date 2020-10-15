@@ -2,7 +2,7 @@
 layout: post
 title:  "A Simple Note for Gaussian Mixture Models"
 date:   2020-10-01 +1200
-keywords: GMM clustering
+keywords: GMM clustering numpy
 categories: Machine-Learning
 ---
 
@@ -246,7 +246,7 @@ Therefore, we got $$\theta_{t+1} = (\mu_1^*, \mu_2^*, ... \mu_K^*, \Sigma_1^*, \
 
 
 
-## 5. A simple python implement
+## 5. A numpy python implementation
 
 First, we need to initialize $$\theta_0$$. Here, we use kmeans++, kmeans and random to initialize parameters. After initialization, we calculate the weights equation $$\eqref{weights}$$, which is the **E-step**.
 
