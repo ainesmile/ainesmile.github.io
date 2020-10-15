@@ -6,7 +6,11 @@ keywords: ap clustering numpy
 categories: Machine-Learning
 ---
 
-## 1. Notions
+## 1. Before Starting
+
+If you are not familiar with Affinity Propagation, please see [Wikipedia](https://en.wikipedia.org/wiki/Affinity_propagation#:~:text=In%20statistics%20and%20data%20mining,message%20passing%22%20between%20data%20points.) or the original paper "Clustering by Passing Messages Between Data Points(2007)" by Brendan J. Frey, Delbert Dueck.
+
+## 2. Notions
 
 * Similarity $$s(i,k)$$: the similarity between point $$k$$ and point $$i$$. It could be the negative Euclidean distance as follower:
 
@@ -43,12 +47,6 @@ a(i, k) \gets min\{0, r(k, k)+\sum_{i' \notin \{i, k\}}max\{0, r(i', k)\}\}
 \label{eqava}
 \end{equation}$$
 
-<!-- $$\sum_{i' \notin \{i, k\}}max\{0, r(i', k)\}\}$$ are the positive responsibilities sent from other points(except point $$i$$ and point $$k$$), which means how suit for point $$k$$ to be the exemplar for other points. Therefore $$r(k, k)+\sum_{i' \notin \{i, k\}}max\{0, r(i', k)\}\}$$ means how suit for point $$k$$ to be the exemplar for other points except point $$i$$.   -->
-
-<!-- Combine with equation $$\eqref{eqres}$$, it is easy to know that a larger $$a(i, k')$$ will result a smaller $$r(i, k)$$, which means a larger availability for other candidate will make point $$k$$ less suit to be the exemplar for point $$i$$. Combine with equation $$\eqref{eqava}$$, we will know a larger $$r(k, k)$$ will result a larger $$a(i, k)$$
-
-Set $$a(i, k) \leq 0$$ to limit the influence of strong -->
-
 * Self-availability $$a(k, k)$$, reflects accumulated evidence that point $$k$$ is an exemplar, based on the positive responsibilities sent to $$k$$ from other points.
 
 $$\begin{equation}
@@ -71,8 +69,6 @@ a_{t+1}(i, k) = \lambda\cdot a_{t}(i, k) + (1-\lambda) \cdot a_{t+1}(i, k)
 \end{equation}$$
 
 
-
-
 * Best exemplar $$k^*$$, for each point $$i$$, the exemplar will be
 
 $$\begin{equation}
@@ -80,7 +76,7 @@ k^* = \underset{k}{\operatorname{argmax}} c(i, k)
 \end{equation}$$
 
 
-## 2. How To Understand?
+## 3. How To Understand?
 
 For $$r(i, k)$$, we can roughly see it as the indicator measuring how appropriate for point $$i$$ to choose candidate $$k$$ as its exemplar compared with other candidates. Larger similarity, other candidate's smaller availability, and other candidate's smaller responsibility will bring on a larger responsibility for candidate $$k$$.
 
@@ -88,11 +84,11 @@ As for $$a(i, k)$$, we can roughly see it as the candidate $$k$$ promotes itself
 
 For damping factor $$\lambda$$, it is used to avoid numerical oscillations. It is import to damping the responsibility matrix $$R$$ first, then using the damped $$R$$ to update the availability matrix $$A$$.
 
-## 3. When To Converge And How To Find Exemplars?
+## 4. When To Converge And How To Find Exemplars?
 
-It will be converge when the exemplars stay constant for some number of iteration, or the changes in the messages fall below a threshold. In this article, we use the first one. When is converged, AP use the criterion matrix $$C$$ to find the exemplars. In each row $$i$$ of the criterion matrix $$C$$, the point with the max value(e.g. point $$k$$) is either the exemplar for point i(if k != i) or is the exemplar(if k == i).
+It will be converged when the exemplars stay constant for some number of iteration, or the changes in the messages fall below a threshold. In this article, we use the first one. When is converged, AP use the criterion matrix $$C$$ to find the exemplars. In each row $$i$$ of the criterion matrix $$C$$, the point with the max value(e.g. point $$k$$) is either the exemplar for point i(if k != i) or is the exemplar(if k == i).
 
-## 4. A Numpy Python Implementation
+## 5. A Numpy Python Implementation
 
 ```python
 import numpy as np
@@ -277,6 +273,6 @@ plot_scatter(axes[1, 1], X, labels_sklearn, 'AP-sklearn')
 
 ![image](/pics/GaussianMixtureModels.png)
 
-## 5. References
+## 6. References
 
 1. Brendan J. Frey, Delbert Dueck(2007). "Clustering by Passing Messages Between Data Points".
