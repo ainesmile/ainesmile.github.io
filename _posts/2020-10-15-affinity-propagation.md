@@ -271,7 +271,7 @@ plot_scatter(axes[1, 0], X, labels_min, 'AP-min-preference')
 plot_scatter(axes[1, 1], X, labels_sklearn, 'AP-sklearn')
 ```
 
-![image](/pics/GaussianMixtureModels.png)
+![image](/pics/ap.png)
 
 ## 6. References
 
